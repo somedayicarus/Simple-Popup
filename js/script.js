@@ -69,7 +69,7 @@ $(document).ready(function () {
     var maskHeight = $(document).height();
 
 
-    if (numCookies <= 2) {
+    if (numCookies <= 10) {
         $('#mask').css({'width': '100%', 'height': maskHeight});
         $('#mask').fadeTo(800, 0.6);
         
