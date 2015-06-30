@@ -17,14 +17,14 @@ var docCookies = {
         var sExpires = "";
         if (vEnd) {
             switch (vEnd.constructor) {
-                case Number:
-                    sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
-                    break;
-                case String:
-                    sExpires = "; expires=" + vEnd;
-                    break;
-                case Date:
-                    sExpires = "; expires=" + vEnd.toUTCString();
+            case Number:
+                sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+                break;
+            case String:
+                sExpires = "; expires=" + vEnd;
+                break;
+            case Date:
+                sExpires = "; expires=" + vEnd.toUTCString();
                 break;
             }
         }
@@ -43,13 +43,11 @@ var docCookies = {
     keys: function () {
         var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
         for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) {   
-            aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); 
+            aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
         }
         return aKeys;
     }
 };
-
-
 
 //get & set cookies with 24 hour expiration
 numCookies = docCookies.getItem('popup');
@@ -61,18 +59,16 @@ if(numCookies == null) {
 numCookies++;
 docCookies.setItem('popup', (numCookies).toString(10), 86400)
 
-
 //popup that loads on 1st and 2nd pageviews per 24 hours
 $(document).ready(function () {
 
     var popWin = '.window';
     var maskHeight = $(document).height();
 
-
     if (numCookies <= 10) {
         $('#mask').css({'width': '100%', 'height': maskHeight});
         $('#mask').fadeTo(800, 0.6);
-        
+
 //function for centering window
     jQuery.fn.center = function() {
         var winH = $(window).height();
@@ -81,21 +77,21 @@ $(document).ready(function () {
         this.css('left', winW / 2 - $(this).outerWidth() / 2);
         return this;
     }
-//set the popup window to center 
+//set the popup window to center
     $(popWin).center();
     $(window).resize(function() {
         $(popWin).center();
-    }) 
-  
+    })
+    
     $(popWin).fadeIn(700);
-  
+        
 //close
     $('.window .close').click(function (e) {
         e.preventDefault();
         $('#mask').hide();
         $('.window').hide();
     });
-     
+    
     $('#mask').click(function () {
         $(this).hide();
         $('.window').hide();
